@@ -1,118 +1,158 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>TweenMax demon</title>
-        <script src="minified/TweenMax.min.js"></script>
-        <!--www.tweenmax.com.cn演示实例-->
-		<!-- Demo styles -->
-		<style>
-		  body {
-			  background-color:#fff;
-			  font-size:16px;
-		  }
-		  #demo {
-			  width:692px;
-			  height:60px;
-			  background-color:#333;
-			  padding:8px;
-			  margin-bottom:10px;
-		  }
-		  .box {
-			  width:50px;
-			  height:50px;
-			  border-radius:6px;
-			  margin-top:4px;
-			  display:inline-block;
-			  position:absolute;
-		  }
-		  .green {
-			  background-color:#6fb936;
-		  }
-		  input[type="button"] {
-			  -webkit-appearance:button;
-			  padding:8px;
-			  margin-right:5px;
-			  margin-bottom: 5px;
-		  }
-		</style>
-	</head>
-	<body>
-    <p>GreenSock 的四个核心工具都可以对动画进行控制。</p>
-		<div id="demo">
-           <div class="box green" id="box"></div>
-        </div>
-        <input type="button" id="playBtn" value="play()" title="播放">
-        <input type="button" id="pauseBtn" value="pause()" title="暂停">
-        <input type="button" id="resumeBtn" value="resume()" title="继续">
-        <input type="button" id="reverseBtn" value="reverse()" title="返回">
-        <input type="button" id="playFromBtn" value="play(5)" title="时间点播放">
-        <input type="button" id="reverseFromBtn" value="reverse(1)" title="时间点返回">
-        <input type="button" id="seekBtn" value="seek(3)" title="时间点播放/返回"><br/>
-        <input type="button" id="timeScaleSlowBtn" value="timeScale(0.5)" title="减速">
-        <input type="button" id="timeScaleNormalBtn" value="timeScale(1)" title="原速">
-        <input type="button" id="timeScaleFastBtn" value="timeScale(2)" title="加速">
-        <input type="button" id="restartBtn" value="restart()" title="重新播放">
-		<script>
-		
-        var box = document.getElementById("box"),
-            playBtn = document.getElementById("playBtn"),
-            pauseBtn = document.getElementById("pauseBtn"),
-            resumeBtn = document.getElementById("resumeBtn"),
-            reverseBtn = document.getElementById("reverseBtn"),
-            playFromBtn = document.getElementById("playFromBtn"),
-            reverseFromBtn = document.getElementById("reverseFromBtn"),
-            seekBtn = document.getElementById("seekBtn"),
-            timeScaleSlowBtn = document.getElementById("timeScaleSlowBtn"),
-            timeScaleNormalBtn = document.getElementById("timeScaleNormalBtn"),
-            timeScaleFastBtn = document.getElementById("timeScaleFastBtn"),
-            restartBtn = document.getElementById("restartBtn"),
-            tween = TweenLite.to(box, 6, {left:"632px", ease:Linear.easeNone});
-        
-	 	    playBtn.onclick = function() {
-			  //当前位置播放动画
-			  //如果动画播放完成, play() 无效
-		      tween.play();
-			}
-			pauseBtn.onclick = function() {
-				tween.pause();
-			}
-			resumeBtn.onclick = function() {
-				//当前位置继续动画.
-				tween.resume();
-			}
-			reverseBtn.onclick = function() {
-				tween.reverse();
-			}
-			playFromBtn.onclick = function() {
-				//某时间点开始播放（秒）.
-				tween.play(5);
-			}
-			reverseFromBtn.onclick = function() {
-				//某时间点开始返回 (秒).
-				tween.reverse(1);
-			}
-			seekBtn.onclick = function() {
-				//跳到特定时间 (秒)
-				tween.seek(3);
-			}
-			timeScaleSlowBtn.onclick = function() {
-			  //减速.
-				tween.timeScale(0.5);
-			}
-			timeScaleNormalBtn.onclick = function() {
-				//恢复速度.
-				tween.timeScale(1);
-			}
-			timeScaleFastBtn.onclick = function() {
-				//加速.
-				tween.timeScale(2);
-			}
-			restartBtn.onclick = function() {
-				//重新开始.
-				tween.restart();
-			}
 
-		</script>
-	</body>
+<head>
+	<meta charset="utf-8">
+	<title>TweenMax demon</title>
+	<script src="minified/TweenMax.min.js"></script>
+	<!-- 4 -->
+	<script src="minified/jquery-1.10.1.min.js"></script>
+	<script src="minified/TweenMax.min.js"></script>
+	<script src="minified/plugins/TextPlugin.min.js"></script>
+	<script src="minified/DrawSVGPlugin.min.js"></script>
+	<style>
+		body {
+			background-color: #fff;
+			font-size: 16px;
+		}
+
+		#demo {
+			height: 60px;
+			background-color: #333;
+			padding: 8px;
+			margin-bottom: 10px;
+			margin-top: 200px;
+		}
+
+		.box {
+			width: 50px;
+			height: 50px;
+			border-radius: 6px;
+			margin-top: 4px;
+			display: inline-block;
+			position: absolute;
+		}
+
+		.green {
+			background-color: #6fb936;
+		}
+
+		input[type="button"] {
+			-webkit-appearance: button;
+			padding: 8px;
+			margin-right: 5px;
+			margin-bottom: 5px;
+		}
+
+		.slid_box {
+			width: 50px;
+			height: 50px;
+			background-color: skyblue;
+			border-radius: 100px;
+		}
+
+		/* 文字 */
+		#myText {
+			font-size: 200%;
+		}
+
+		.class1 {
+			color: #6fb936;
+		}
+
+		.class2 {
+			color: #f38630;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="myText">古寺</div>
+	<div id="demo">
+		<div class="box green" id="box"></div>
+	</div>
+	<input type="button" id="playBtn" value="播放()" title="播放">
+	<input type="button" id="pauseBtn" value="暂停()" title="暂停">
+	<input type="button" id="resumeBtn" value="继续()" title="继续">
+	<input type="button" id="reverseBtn" value="返回()" title="返回">
+	<input type="button" id="playFromBtn" value="时间点播放(5)" title="时间点播放">
+	<input type="button" id="reverseFromBtn" value="时间点返回(1)" title="时间点返回">
+	<input type="button" id="timeScaleSlowBtn" value="减速(0.5)" title="减速">
+	<input type="button" id="timeScaleNormalBtn" value="原速(1)" title="原速">
+	<input type="button" id="timeScaleFastBtn" value="加速(2)" title="加速">
+	<input type="button" id="restartBtn" value="重新播放()" title="重新播放">
+	<hr />
+	<div>
+		<div class="slid_box" id="slid_box"></div>
+	</div>
+	<script>
+
+		var box = document.getElementById("box"),
+			playBtn = document.getElementById("playBtn"),
+			pauseBtn = document.getElementById("pauseBtn"),
+			resumeBtn = document.getElementById("resumeBtn"),
+			reverseBtn = document.getElementById("reverseBtn"),
+			playFromBtn = document.getElementById("playFromBtn"),
+			reverseFromBtn = document.getElementById("reverseFromBtn"),
+			timeScaleSlowBtn = document.getElementById("timeScaleSlowBtn"),
+			timeScaleNormalBtn = document.getElementById("timeScaleNormalBtn"),
+			timeScaleFastBtn = document.getElementById("timeScaleFastBtn"),
+			restartBtn = document.getElementById("restartBtn"),
+			tween = TweenLite.to(box, 10, { left: "60%", });
+		// TweenLite.to(box, 1, { top: "1000px", left: "1000px", delay: 1 });
+		TweenLite.to(box, 1, { top: "260px", left: "20px", delay: 10 });
+
+		playBtn.onclick = function () {
+			//当前位置播放动画
+			//如果动画播放完成, play() 无效
+			tween.play();
+		}
+		pauseBtn.onclick = function () {
+			tween.pause();
+		}
+		resumeBtn.onclick = function () {
+			//当前位置继续动画.
+			tween.resume();
+		}
+		reverseBtn.onclick = function () {
+			tween.reverse();
+		}
+		playFromBtn.onclick = function () {
+			//某时间点开始播放（秒）.
+			tween.play(5);
+		}
+		reverseFromBtn.onclick = function () {
+			//某时间点开始返回 (秒).
+			tween.reverse(1);
+		}
+		timeScaleSlowBtn.onclick = function () {
+			//减速.
+			tween.timeScale(0.5);
+		}
+		timeScaleNormalBtn.onclick = function () {
+			//恢复速度.
+			tween.timeScale(1);
+		}
+		timeScaleFastBtn.onclick = function () {
+			//加速.
+			tween.timeScale(2);
+		}
+		restartBtn.onclick = function () {
+			//重新开始.
+			tween.restart();
+		}
+		var slid_box = document.getElementById("slid_box")
+		TweenLite.to(slid_box, 10, { bezier: [{ x: 100, y: 250 }, { x: 300, y: 0 }, { x: 500, y: 100 }, { x: 700, y: 400 }, { x: 900, y: 100 }] });
+		TweenLite.to(slid_box, 2, { x: 20, delay: 10 })
+		// 文字
+		var tm = new TimelineMax({ repeat: 0 });
+		console.log(tm.to);
+		tm.to("#myText", 1, { text: { value: "春眠不觉晓", newClass: "class2", oldClass: "class1" } })
+		tm.to("#myText", 1, { text: { value: "处处闻啼鸟", newClass: "class2", oldClass: "class1" } })
+		tm.to("#myText", 1, { text: { value: "夜来风雨声", newClass: "class2", oldClass: "class1" } })
+		tm.to("#myText", 1, { text: { value: "花落知多少", newClass: "class2", oldClass: "class1" } })
+		tm.to("#myText", 1, { text: { value: "完 - 古寺", newClass: "class2", oldClass: "class1" } });
+	</script>
+</body>
+
 </html>

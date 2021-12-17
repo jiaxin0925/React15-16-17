@@ -14,6 +14,7 @@
 				color: #000;
 				margin: 0 10px;
 				padding: 0;
+				border: 1px solid #ccc;
 			}
             p{
 				margin-bottom:1em;
@@ -42,7 +43,6 @@
 		</style>
 	</head>
 	<body>
-    <p>TweenMax、TimelineMax 比TweenLite、TimelineLite 功能更多，例如repeat 和yoyo。</p>
 	<div id="demo">
              <div class="box green" id="greenBox">0</div>
     </div>
@@ -57,7 +57,7 @@
 				repeat: 10,
 				yoyo: true,
 				onRepeat: onRepeat,
-				repeatDelay: 0.5,
+				repeatDelay: 0,
 				ease: Linear.easeNone
 			});
 
